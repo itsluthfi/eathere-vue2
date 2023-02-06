@@ -34,7 +34,7 @@
           </h2>
           <hr />
           <h4>
-            Price :
+            Price:
             <strong>Rp. {{ product.harga }}</strong>
           </h4>
           <form class="mt-4" v-on:submit.prevent>
@@ -43,15 +43,15 @@
               <input
                 type="number"
                 class="form-control"
-                v-model="order.jumlah_pemesanan"
+                v-model="pesan.jumlah_pemesanan"
               />
             </div>
             <div class="form-group">
-              <label for="keterangan">Order Details</label>
+              <label for="keterangan">Detail</label>
               <textarea
-                v-model="order.keterangan"
+                v-model="pesan.keterangan"
                 class="form-control"
-                placeholder="Spicy, add more ice"
+                placeholder="Spicy, half portion, ..."
               ></textarea>
             </div>
 
@@ -77,7 +77,7 @@ export default {
   data() {
     return {
       product: {},
-      order: {},
+      pesan: {},
     };
   },
   methods: {
@@ -85,13 +85,13 @@ export default {
       this.product = data;
     },
     pemesanan() {
-      if (this.order.jumlah_pemesanan) {
-        this.order.products = this.product;
+      if (this.pesan.jumlah_pemesanan) {
+        this.pesan.products = this.product;
         axios
-          .post("http://localhost:3000/carts", this.order)
+          .post("http://localhost:3000/keranjangs", this.pesan)
           .then(() => {
-            this.$router.push({ path: "/cart" });
-            this.$toast.success("Success added to cart!", {
+            this.$router.push({ path: "/carts" });
+            this.$toast.success("Success add to cart!", {
               type: "success",
               position: "top-right",
               duration: 3000,
